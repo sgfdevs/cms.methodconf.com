@@ -2,7 +2,7 @@ services:
   backend-queue-dev:
     build:
       context: ./
-      dockerfile: ./docker/cli.Dockerfile
+      dockerfile: ./docker/cli.dev.Dockerfile
       args:
           WWWUSER: "${WWWUSER:-1000}"
           WWWGROUP: "${WWWGROUP:-1000}"
@@ -20,7 +20,7 @@ services:
   backend-web-dev:
     build:
       context: ./
-      dockerfile: ./docker/web.Dockerfile
+      dockerfile: ./docker/web.dev.Dockerfile
       args:
           WWWUSER: "${WWWUSER:-1000}"
           WWWGROUP: "${WWWGROUP:-1000}"
@@ -36,6 +36,44 @@ services:
     volumes:
       - .:/app
     profiles: [backend-dev]
+
+  backend-migrator-prod:
+    build:
+      context: ./
+      dockerfile: ./docker/cli.prod.Dockerfile
+    env_file: .env
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: php craft up
+    profiles: [backend-prod]
+  
+  backend-queue-prod:
+    build:
+      context: ./
+      dockerfile: ./docker/cli.prod.Dockerfile
+    env_file: .env
+    depends_on:
+      mysql:
+        condition: service_healthy
+      backend-migrator-prod:
+        condition: service_completed_successfully
+    command: php craft queue/listen
+    profiles: [backend-prod]
+
+  backend-web-prod:
+    build:
+      context: ./
+      dockerfile: ./docker/web.prod.Dockerfile
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      mysql:
+        condition: service_healthy
+      backend-migrator-prod:
+        condition: service_completed_successfully
+    profiles: [backend-prod]
 
   mysql:
     image: mysql:8.0.37
