@@ -1,12 +1,11 @@
 services:
-  console:
+  backend-queue-dev:
     build:
-      context: ./docker
-      dockerfile: cli.Dockerfile
+      context: ./
+      dockerfile: ./docker/cli.Dockerfile
       args:
           WWWUSER: "${WWWUSER:-1000}"
           WWWGROUP: "${WWWGROUP:-1000}"
-    image: craft-8.2/cli
     env_file: .env
     environment:
       XDEBUG_CONFIG: client_host=host.docker.internal
@@ -16,15 +15,15 @@ services:
     volumes:
       - .:/app
     command: php craft queue/listen
+    profiles: [backend-dev]
 
-  web:
+  backend-web-dev:
     build:
-      context: ./docker
-      dockerfile: web.Dockerfile
+      context: ./
+      dockerfile: ./docker/web.Dockerfile
       args:
           WWWUSER: "${WWWUSER:-1000}"
           WWWGROUP: "${WWWGROUP:-1000}"
-    image: craft-8.2/app
     ports:
       - "8080:8080"
       - "5173:5173"
@@ -36,6 +35,7 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
+    profiles: [backend-dev]
 
   mysql:
     image: mysql:8.0.37
@@ -53,6 +53,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-p${CRAFT_DB_PASSWORD}"]
       interval: 5s
+    profiles: [database]
 
 volumes:
   db_data:

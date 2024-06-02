@@ -15,7 +15,7 @@ RUN chown www-data /run/supervisord.pid
 RUN chown -R www-data:www-data /var/lib/nginx/logs/
 RUN chown -R www-data:www-data /app
 
-COPY start-container /usr/local/bin/start-container
+COPY ./docker/start-container /usr/local/bin/start-container
 RUN chmod +x /usr/local/bin/start-container
 
 USER www-data
