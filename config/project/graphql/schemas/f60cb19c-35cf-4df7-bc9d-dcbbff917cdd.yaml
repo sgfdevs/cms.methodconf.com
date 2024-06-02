@@ -1,2 +1,15 @@
 isPublic: true
 name: 'Public Schema'
+scope:
+  - 'sites.55cfac3d-0c99-45c7-a9df-cfb0299201e6:read' # Method Conf
+  - 'sections.85f7820d-ba64-48d7-9114-08e3de79222d:read' # Home Page
+  - 'sections.385f8afb-ae4d-48e1-ab4d-044ea815d451:read' # Page
+  - 'sections.e985d336-b545-4c61-a2f6-5c5fba1ab083:read' # Session
+  - 'sections.e89bcf47-f993-48a1-a261-492a199be1bd:read' # Speaker
+  - 'sections.5cd67bde-12a3-411c-a156-199fc34c7e80:read' # Sponsors
+  - 'nestedentryfields.624394ce-bb4a-4e0a-8154-e7bc6371da79:read' # Bio
+  - 'nestedentryfields.9536067d-c794-497b-977b-83252c95af94:read' # Description
+  - 'nestedentryfields.776d50aa-32ed-43ec-8217-4d36b3d9ca3b:read' # Page Content
+  - 'volumes.3b75095c-c375-4b83-b48c-3238aa0472d1:read' # Local Volume
+  - 'globalsets.dd6ca768-6d95-4de3-8e3e-133bcdf83452:read' # Meta
+  - 'categorygroups.e23f857a-b75c-47ea-959b-ce61589c89f8:read' # Session Types
