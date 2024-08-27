@@ -1,5 +1,5 @@
 services:
-  cms:
+  backend:
     build:
       context: ./
       dockerfile: ./Dockerfile
