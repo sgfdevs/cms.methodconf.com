@@ -1,3 +1,5 @@
+using Umbraco.Cms.Web.Common.Routing;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.CreateUmbracoBuilder()
@@ -11,6 +13,8 @@ var app = builder.Build();
 
 await app.BootUmbracoAsync();
 
+app.MapControllerRoute("default", "/",
+    new { Controller = "Home", Action = "Index" });
 
 app.UseUmbraco()
     .WithMiddleware(u =>
