@@ -1,20 +1,26 @@
 services:
-  backend:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    ports:
-      - '${APP_PORT:-8080}:8080'
-    env_file:
-      - .env
-    volumes:
-      - './umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
-      - './wwwroot/media:/app/wwwroot/media'
-      - 'media-cache:/app/umbraco/TEMP/MediaCache'
-      - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
-    restart: unless-stopped
-    profiles: [backend]
+    backend:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        ports:
+            - '${APP_PORT:-8080}:8080'
+        env_file:
+            - .env
+        volumes:
+            - './umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
+            - './wwwroot/media:/app/wwwroot/media'
+            - 'media-cache:/app/umbraco/TEMP/MediaCache'
+            - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
+        restart: unless-stopped
+        profiles: [ backend ]
+    maildev:
+        image: maildev/maildev
+        ports:
+            - '${SMTP_PORT:-1025}:1025'
+            - '${EMAIL_GUI_PORT:-1080}:1080'
+        profiles: [ local-email ]
 
 volumes:
-  media-cache:
-  data-protection-keys:
+    media-cache:
+    data-protection-keys:
