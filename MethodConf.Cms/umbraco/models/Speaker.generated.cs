@@ -66,6 +66,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string InstagramUrl => this.Value<string>(_publishedValueFallback, "instagramUrl");
 
 		///<summary>
+		/// Job Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("jobTitle")]
+		public virtual string JobTitle => this.Value<string>(_publishedValueFallback, "jobTitle");
+
+		///<summary>
 		/// LinkedIn Url
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
