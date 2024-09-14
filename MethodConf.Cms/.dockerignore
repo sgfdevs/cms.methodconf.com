@@ -21,5 +21,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+**/umbraco/Data
+**/umbraco/Logs
+**/wwwroot/media
 LICENSE
 README.md
