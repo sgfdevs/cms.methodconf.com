@@ -1,4 +1,4 @@
-using Umbraco.Cms.Web.Common.Routing;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,11 @@ builder.CreateUmbracoBuilder()
     .Build();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging(options =>
+{
+    options.IncludeQueryInRequestPath = true;
+});
 
 await app.BootUmbracoAsync();
 
