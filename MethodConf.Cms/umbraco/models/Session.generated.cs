@@ -65,12 +65,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::System.DateTime End => this.Value<global::System.DateTime>(_publishedValueFallback, "end");
 
 		///<summary>
-		/// Speaker
+		/// Speakers
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("speaker")]
-		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent Speaker => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "speaker");
+		[ImplementPropertyType("speakers")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> Speakers => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "speakers");
 
 		///<summary>
 		/// Start
