@@ -73,19 +73,19 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string Location => this.Value<string>(_publishedValueFallback, "location");
 
 		///<summary>
+		/// Register Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("registerUrl")]
+		public virtual string RegisterUrl => this.Value<string>(_publishedValueFallback, "registerUrl");
+
+		///<summary>
 		/// Tagline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("tagline")]
 		public virtual string Tagline => this.Value<string>(_publishedValueFallback, "tagline");
-
-		///<summary>
-		/// Ticket Url
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("ticketUrl")]
-		public virtual string TicketUrl => this.Value<string>(_publishedValueFallback, "ticketUrl");
 	}
 }
