@@ -14,14 +14,14 @@ services:
       - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
     restart: unless-stopped
     profiles: [ backend ]
-  sqlite0web:
+  sqlite-web:
     build:
       context: https://github.com/coleifer/sqlite-web.git
       dockerfile: docker/Dockerfile
     ports:
       - "${SQLITE_WEB_PORT:-8080}:8080"
     volumes:
-      - ./src/MethodConf.Cms/umbraco/Data/Umbraco.sqlite.db:/data
+      - ./src/MethodConf.Cms/umbraco/Data:/data
     env_file:
       - .env
     command: >
