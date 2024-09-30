@@ -14,5 +14,9 @@ public class DefaultProfile : Profile
             .ForMember(dest => dest.Key, opts => opts.MapFrom(src => src.UrlSegment));
         CreateMap<Track, TrackItem>()
             .ForMember(dest => dest.Sessions, opt => opt.MapFrom((src, _) => src.Children<Session>() ?? []));
+
+        CreateMap<CreateSessionFeedbackRequestDto, CreateSessionFeedback>();
+        CreateMap<CreateSessionFeedback, SessionFeedback>();
+        CreateMap<SessionFeedback, SessionFeedbackResponseDto>();
     }
 }

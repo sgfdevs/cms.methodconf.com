@@ -1,7 +1,6 @@
 using MethodConf.Cms.Converters;
-using MethodConf.Cms.Mapping;
+using MethodConf.Cms.Infrastructure;
 using MethodConf.Cms.Services;
-using MethodConf.Cms.Services.Interfaces;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,9 +23,8 @@ builder.Services.AddSwaggerGen(opts =>
     opts.SchemaFilter<MultiDimensionalArraySchemaFilter>();
 });
 
-builder.Services.AddScoped<IScheduleGridGenerator, ScheduleGridGenerator>();
-builder.Services.AddScoped<IConferenceScheduleService, ConferenceScheduleService>();
-builder.Services.AddAutoMapper(typeof(DefaultProfile));
+builder.AddApplicationInfrastructure();
+builder.AddApplicationServices();
 
 var app = builder.Build();
 

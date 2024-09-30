@@ -65,6 +65,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::System.DateTime End => this.Value<global::System.DateTime>(_publishedValueFallback, "end");
 
 		///<summary>
+		/// Is Eligible For Feedback
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[ImplementPropertyType("isEligibleForFeedback")]
+		public virtual bool IsEligibleForFeedback => this.Value<bool>(_publishedValueFallback, "isEligibleForFeedback");
+
+		///<summary>
 		/// Speakers
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]

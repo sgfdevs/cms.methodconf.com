@@ -1,23 +1,21 @@
 using AutoMapper;
+using FluentResults;
 using MethodConf.Cms.Domain;
+using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Services.Interfaces;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.PublishedModels;
 
 namespace MethodConf.Cms.Services;
 
-public class ConferenceScheduleService(IUmbracoContextFactory umbracoContextFactory, IScheduleGridGenerator scheduleGridGenerator, IMapper mapper) : IConferenceScheduleService
+public class ConferenceScheduleService(IPublishedContentQuery publishedContentQuery, IScheduleGridGenerator scheduleGridGenerator, IMapper mapper) : IConferenceScheduleService
 {
-    public ConferenceSchedule? GetSchedule(Guid conferenceId)
+    public Result<ConferenceSchedule> GetSchedule(Guid conferenceId)
     {
-        using var contextReference = umbracoContextFactory.EnsureUmbracoContext();
-        var content = contextReference.UmbracoContext.Content ?? throw new InvalidOperationException();
-
-        var conference = content.GetById(conferenceId);
-
-        if (conference is null)
+        if (publishedContentQuery.Content(conferenceId) is not Conference conference)
         {
-            return null;
+            return Result.Fail(new InvalidEntityIdError(conferenceId.ToString()));
         }
 
         var sessions = conference.FirstChild<Sessions>()?.Children.ToArray() ?? [];
