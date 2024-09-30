@@ -1,0 +1,33 @@
+name: Lint Build Test
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  lint-build-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './frontend'
+    env:
+      NEXT_PUBLIC_UMBRACO_BASE_URL: ${{ secrets.NEXT_PUBLIC_UMBRACO_BASE_URL }}
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './frontend/.nvmrc'
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+  lint-build-test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore
+      - run: dotnet format --verify-no-changes --verbosity diagnostic
+      - run: dotnet build
+      - run: dotnet test

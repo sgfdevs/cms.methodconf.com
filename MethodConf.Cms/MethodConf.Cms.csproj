@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Umbraco.Cms" Version="14.2.0" />
     <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="14.0.0-beta.1" />
     <PackageReference Include="uSync" Version="14.0.0" />

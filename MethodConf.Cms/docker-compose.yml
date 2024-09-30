@@ -1,41 +1,41 @@
 services:
-    backend:
-        build:
-            context: ./
-            dockerfile: ./Dockerfile
-        ports:
-            - '${APP_PORT:-8080}:8080'
-        env_file:
-            - .env
-        volumes:
-            - './umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
-            - './wwwroot/media:/app/wwwroot/media'
-            - 'media-cache:/app/umbraco/TEMP/MediaCache'
-            - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
-        restart: unless-stopped
-        profiles: [ backend ]
-    sqlite0web:
-        build:
-            context: https://github.com/coleifer/sqlite-web.git
-            dockerfile: docker/Dockerfile
-        ports:
-            - "${SQLITE_WEB_PORT:-8080}:8080"
-        volumes:
-            - ./umbraco/Data/:/data
-        env_file:
-            - .env
-        command: >
-            sqlite_web /data/Umbraco.sqlite.db
-            --password "$SQLITE_WEB_PASSWORD"
-            --host 0.0.0.0
-        profiles: [ sqlite-web ]
-    maildev:
-        image: maildev/maildev
-        ports:
-            - '${SMTP_PORT:-1025}:1025'
-            - '${EMAIL_GUI_PORT:-1080}:1080'
-        profiles: [ local-email ]
+  backend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - '${APP_PORT:-8080}:8080'
+    env_file:
+      - .env
+    volumes:
+      - './umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
+      - './wwwroot/media:/app/wwwroot/media'
+      - 'media-cache:/app/umbraco/TEMP/MediaCache'
+      - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
+    restart: unless-stopped
+    profiles: [ backend ]
+  sqlite0web:
+    build:
+      context: https://github.com/coleifer/sqlite-web.git
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${SQLITE_WEB_PORT:-8080}:8080"
+    volumes:
+      - ./umbraco/Data/:/data
+    env_file:
+      - .env
+    command: >
+      sqlite_web /data/Umbraco.sqlite.db
+      --password "$SQLITE_WEB_PASSWORD"
+      --host 0.0.0.0
+    profiles: [ sqlite-web ]
+  maildev:
+    image: maildev/maildev
+    ports:
+      - '${SMTP_PORT:-1025}:1025'
+      - '${EMAIL_GUI_PORT:-1080}:1080'
+    profiles: [ local-email ]
 
 volumes:
-    media-cache:
-    data-protection-keys:
+  media-cache:
+  data-protection-keys:
