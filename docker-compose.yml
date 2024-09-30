@@ -21,7 +21,7 @@ services:
     ports:
       - "${SQLITE_WEB_PORT:-8080}:8080"
     volumes:
-      - ./umbraco/Data/:/data
+      - ./src/MethodConf.Cms/umbraco/Data/Umbraco.sqlite.db:/data
     env_file:
       - .env
     command: >
