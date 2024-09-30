@@ -10,7 +10,7 @@ services:
     volumes:
       - './umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
       - './wwwroot/media:/app/wwwroot/media'
-      - 'media-cache:/app/umbraco/TEMP/MediaCache'
+      - 'cache:/app/umbraco/Data/TEMP'
       - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
     restart: unless-stopped
     profiles: [ backend ]
@@ -37,5 +37,5 @@ services:
     profiles: [ local-email ]
 
 volumes:
-  media-cache:
+  cache:
   data-protection-keys:

@@ -1,8 +1,22 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms", "MethodConf.Cms\MethodConf.Cms.csproj", "{7FCBF5F5-75D1-445A-89AF-E6E4FDC1588C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{164711D0-ED4A-492D-BD94-073C1DE0604E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms.Tests", "MethodConf.Cms.Tests\MethodConf.Cms.Tests.csproj", "{2E4FE15E-AEEC-417C-8543-33146713E576}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms", "backend\src\MethodConf.Cms\MethodConf.Cms.csproj", "{4D86F9D2-774E-43D7-A8F6-878D10851AA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B300E205-8207-442E-A4EF-F252BDA321A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms.Tests", "backend\tests\MethodConf.Cms.Tests\MethodConf.Cms.Tests.csproj", "{90AD8E26-CBDD-487E-BD46-2A7179CE640B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{502A12F2-BA26-41C8-B0CA-3F9C73F79E39}"
+	ProjectSection(SolutionItems) = preProject
+		backend\.dockerignore = backend\.dockerignore
+		backend\.env = backend\.env
+		backend\.env.example = backend\.env.example
+		backend\docker-compose.yml = backend\docker-compose.yml
+		backend\Dockerfile = backend\Dockerfile
+		backend\.gitignore = backend\.gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +24,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7FCBF5F5-75D1-445A-89AF-E6E4FDC1588C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FCBF5F5-75D1-445A-89AF-E6E4FDC1588C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FCBF5F5-75D1-445A-89AF-E6E4FDC1588C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FCBF5F5-75D1-445A-89AF-E6E4FDC1588C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E4FE15E-AEEC-417C-8543-33146713E576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E4FE15E-AEEC-417C-8543-33146713E576}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E4FE15E-AEEC-417C-8543-33146713E576}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E4FE15E-AEEC-417C-8543-33146713E576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D86F9D2-774E-43D7-A8F6-878D10851AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D86F9D2-774E-43D7-A8F6-878D10851AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D86F9D2-774E-43D7-A8F6-878D10851AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D86F9D2-774E-43D7-A8F6-878D10851AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90AD8E26-CBDD-487E-BD46-2A7179CE640B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90AD8E26-CBDD-487E-BD46-2A7179CE640B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90AD8E26-CBDD-487E-BD46-2A7179CE640B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90AD8E26-CBDD-487E-BD46-2A7179CE640B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D86F9D2-774E-43D7-A8F6-878D10851AA5} = {164711D0-ED4A-492D-BD94-073C1DE0604E}
+		{90AD8E26-CBDD-487E-BD46-2A7179CE640B} = {B300E205-8207-442E-A4EF-F252BDA321A6}
 	EndGlobalSection
 EndGlobal

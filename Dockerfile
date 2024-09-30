@@ -7,9 +7,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["./MethodConf.Cms.csproj", "MethodConf.Cms/"]
+COPY ["./src/MethodConf.Cms/MethodConf.Cms.csproj", "MethodConf.Cms/"]
 RUN dotnet restore "MethodConf.Cms/MethodConf.Cms.csproj"
-COPY . MethodConf.Cms
+COPY ./src/MethodConf.Cms MethodConf.Cms
 WORKDIR "/src/MethodConf.Cms"
 RUN dotnet build "MethodConf.Cms.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

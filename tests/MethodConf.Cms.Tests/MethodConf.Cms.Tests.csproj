@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MethodConf.Cms\MethodConf.Cms.csproj" />
+      <ProjectReference Include="..\..\src\MethodConf.Cms\MethodConf.Cms.csproj" />
     </ItemGroup>
 
 </Project>
