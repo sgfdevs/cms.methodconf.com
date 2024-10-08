@@ -50,6 +50,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// Opportunities Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("opportunitiesUrl")]
+		public virtual global::Umbraco.Cms.Core.Models.Link OpportunitiesUrl => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "opportunitiesUrl");
+
+		///<summary>
 		/// Tiers
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
