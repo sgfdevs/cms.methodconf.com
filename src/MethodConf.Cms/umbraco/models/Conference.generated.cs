@@ -81,6 +81,21 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string RegisterUrl => this.Value<string>(_publishedValueFallback, "registerUrl");
 
 		///<summary>
+		/// Survey Available At: Determines when the survey will be available in the app
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[ImplementPropertyType("surveyAvailableAt")]
+		public virtual global::System.DateTime SurveyAvailableAt => this.Value<global::System.DateTime>(_publishedValueFallback, "surveyAvailableAt");
+
+		///<summary>
+		/// Survey Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("surveyUrl")]
+		public virtual global::Umbraco.Cms.Core.Models.Link SurveyUrl => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "surveyUrl");
+
+		///<summary>
 		/// Tagline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
