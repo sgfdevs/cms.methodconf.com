@@ -9,4 +9,6 @@ public class CreateSessionFeedback
     public required int VenueRating { get; set; }
 
     public required string Comments { get; set; }
+
+    public string? Email { get; set; }
 }
