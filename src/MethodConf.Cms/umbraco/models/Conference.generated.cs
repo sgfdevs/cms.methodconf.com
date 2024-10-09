@@ -73,6 +73,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string Location => this.Value<string>(_publishedValueFallback, "location");
 
 		///<summary>
+		/// Mobile App Links
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("mobileAppLinks")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> MobileAppLinks => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "mobileAppLinks");
+
+		///<summary>
 		/// Register Url
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
