@@ -4,7 +4,9 @@ namespace MethodConf.Cms.Domain;
 
 public class SessionFeedback
 {
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
+
+    public required Guid SessionId { get; set; }
 
     public required int SpeakerRating { get; set; }
 
