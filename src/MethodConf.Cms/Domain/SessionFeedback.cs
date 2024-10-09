@@ -14,4 +14,7 @@ public class SessionFeedback
 
     [MaxLength(5000)]
     public required string Comments { get; set; }
+
+    [MaxLength(255)]
+    public string? Email { get; set; }
 }
