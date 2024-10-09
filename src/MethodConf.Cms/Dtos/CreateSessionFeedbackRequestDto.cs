@@ -14,7 +14,7 @@ public class CreateSessionFeedbackRequestDto
     public required int VenueRating { get; set; }
 
     [MaxLength(5000)]
-    public required string Comments { get; set; }
+    public string? Comments { get; set; }
 
     [MaxLength(255)]
     public string? Email { get; set; }
