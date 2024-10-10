@@ -17,5 +17,8 @@ public class CreateSessionFeedbackRequestDto
     public string? Comments { get; set; }
 
     [MaxLength(255)]
+    public string? Name { get; set; }
+
+    [MaxLength(255)]
     public string? Email { get; set; }
 }

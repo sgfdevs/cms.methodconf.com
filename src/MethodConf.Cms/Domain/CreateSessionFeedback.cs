@@ -10,5 +10,7 @@ public class CreateSessionFeedback
 
     public required string Comments { get; set; }
 
+    public string? Name { get; set; }
+
     public string? Email { get; set; }
 }
