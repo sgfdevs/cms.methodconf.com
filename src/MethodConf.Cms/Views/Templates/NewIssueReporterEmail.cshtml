@@ -1,0 +1,41 @@
+@model MethodConf.Cms.Dtos.NewIssueEmailViewModel
+@{
+    Layout = "~/Views/_EmailLayout.cshtml";
+}
+
+<p>Here's a copy of the issue you reported. An organizer will follow up with you as soon as possible</p>
+<p>
+    <strong>Message:</strong>
+    <br>
+    <br>
+    @{
+        var encodedMessage = HtmlEncoder.Encode(Model.Message).Replace("\n", "<br>");
+    }
+    @Html.Raw(encodedMessage)
+    <br>
+</p>
+@if (!string.IsNullOrWhiteSpace(Model.Resolution))
+{
+<p>
+    <strong>Resolution:</strong>
+    <br>
+    <br>
+    @{
+        var encodedResolution = HtmlEncoder.Encode(Model.Resolution).Replace("\n", "<br>");
+    }
+    @Html.Raw(encodedResolution)
+    <br>
+</p>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Name))
+{
+    <p><strong>Name: </strong>@Model.Name</p>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Email))
+{
+    <p><strong>Email: </strong>@Model.Email</p>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Phone))
+{
+    <p><strong>Phone: </strong>@Model.Phone</p>
+}

@@ -10,4 +10,6 @@ public class AppDbContext : DbContext
     }
 
     public required DbSet<SessionFeedback> SessionFeedback { get; set; }
+
+    public required DbSet<Issue> Issues { get; set; }
 }

@@ -13,10 +13,21 @@ public class DefaultProfile : Profile
         CreateMap<Session, SessionItem>()
             .ForMember(dest => dest.Key, opts => opts.MapFrom(src => src.UrlSegment));
         CreateMap<Track, TrackItem>()
-            .ForMember(dest => dest.Sessions, opt => opt.MapFrom((src, _) => src.Children<Session>() ?? []));
+            .ForMember(dest => dest.Sessions, opts => opts.MapFrom((src, _) => src.Children<Session>() ?? []));
 
         CreateMap<CreateSessionFeedbackRequestDto, CreateSessionFeedback>();
         CreateMap<CreateSessionFeedback, SessionFeedback>();
         CreateMap<SessionFeedback, SessionFeedbackResponseDto>();
+
+        CreateMap<CreateIssueRequestDto, CreateIssue>()
+            .ForMember(dest => dest.PhoneNumber, opts => opts.MapFrom(src => src.Phone));
+        CreateMap<CreateIssue, Issue>();
+        CreateMap<Issue, IssueWithResponse>();
+        CreateMap<IssueWithResponse, CreateIssueResponseDto>()
+            .ForMember(dest => dest.Phone, opts => opts.MapFrom(src => src.PhoneNumber));
+        CreateMap<Issue, NewIssueEmailViewModel>()
+            .ForMember(dest => dest.Phone, opts => opts.MapFrom(src => src.PhoneNumber));
+        CreateMap<Issue, NewIssueAppResponseViewModel>()
+            .ForMember(dest => dest.Phone, opts => opts.MapFrom(src => src.PhoneNumber));
     }
 }

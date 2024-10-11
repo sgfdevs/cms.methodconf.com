@@ -25,7 +25,7 @@ public class SessionFeedbackService(IPublishedContentQuery publishedContentQuery
         }
 
         var sessionFeedback = mapper.Map<SessionFeedback>(createSessionFeedback);
-        sessionFeedback.SessionId = sessionId;
+        sessionFeedback.SessionId = session.Key;
 
         dbContext.SessionFeedback.Add(sessionFeedback);
         await dbContext.SaveChangesAsync();

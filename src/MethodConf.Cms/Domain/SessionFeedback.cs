@@ -13,7 +13,7 @@ public class SessionFeedback
 
     public required int VenueRating { get; set; }
 
-    [MaxLength(5000)]
+    [MaxLength(10_000)]
     public string? Comments { get; set; }
 
     [MaxLength(255)]
