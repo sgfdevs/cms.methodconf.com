@@ -7,7 +7,6 @@
 <p>
     <strong>Message:</strong>
     <br>
-    <br>
     @{
         var encodedMessage = HtmlEncoder.Encode(Model.Message).Replace("\n", "<br>");
     }
@@ -18,7 +17,6 @@
 {
 <p>
     <strong>Resolution:</strong>
-    <br>
     <br>
     @{
         var encodedResolution = HtmlEncoder.Encode(Model.Resolution).Replace("\n", "<br>");

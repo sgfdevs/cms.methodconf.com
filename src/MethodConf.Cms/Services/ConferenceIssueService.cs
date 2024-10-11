@@ -24,6 +24,7 @@ public class ConferenceIssueService(
     IMapper mapper) : IConferenceIssueService
 {
     private const string OrganizerEmailSubject = "New Issue Reported for Method Conf";
+    private const string ReporterEmailSubject = "Your Issue Has Been Recieved";
     private const string OrganizerEmail = "info@methodconf.com";
     public async Task<Result<IssueWithResponse>> CreateIssue(Guid conferenceId, CreateIssue createIssue)
     {
@@ -81,7 +82,7 @@ public class ConferenceIssueService(
     private async Task SendReporterEmail(string reporterEmail, Issue issue)
     {
         var vm = mapper.Map<NewIssueEmailViewModel>(issue);
-        vm.Title = OrganizerEmailSubject;
+        vm.Title = ReporterEmailSubject;
         var content = await razorEngine.RenderAsync("~/Views/Templates/NewIssueReporterEmail.cshtml", vm);
 
         var message = new EmailMessage(
@@ -90,7 +91,7 @@ public class ConferenceIssueService(
             cc: [OrganizerEmail],
             bcc: null,
             replyTo: [OrganizerEmail],
-            subject: OrganizerEmailSubject,
+            subject: ReporterEmailSubject,
             body: content,
             isBodyHtml: true,
             attachments: null);
