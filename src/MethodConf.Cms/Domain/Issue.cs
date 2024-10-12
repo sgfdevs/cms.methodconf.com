@@ -22,4 +22,6 @@ public class Issue
 
     [MaxLength(255)]
     public string? PhoneNumber { get; set; }
+
+    public DateTime CreatedAt { get; set; }
 }

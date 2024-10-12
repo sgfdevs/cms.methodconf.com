@@ -21,4 +21,6 @@ public class SessionFeedback
 
     [MaxLength(255)]
     public string? Email { get; set; }
+
+    public DateTime CreatedAt { get; set; }
 }

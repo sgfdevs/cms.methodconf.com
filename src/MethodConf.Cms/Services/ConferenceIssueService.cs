@@ -35,6 +35,7 @@ public class ConferenceIssueService(
 
         var newIssue = mapper.Map<Issue>(createIssue);
         newIssue.ConferenceId = conference.Key;
+        newIssue.CreatedAt = DateTime.UtcNow;
 
         dbContext.Add(newIssue);
         await dbContext.SaveChangesAsync();
