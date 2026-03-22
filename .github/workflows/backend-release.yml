@@ -1,0 +1,46 @@
+name: Backend Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-**'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      new-release-published: ${{ steps.semantic.outputs.new-release-published }}
+      release-version: ${{ steps.semantic.outputs.release-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - run: npm install -g semantic-release conventional-changelog-conventionalcommits @semantic-release/exec
+
+      - name: Create Release
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./backend
+        run: npx semantic-release
+
+  docker:
+    needs: release
+    if: ${{ needs.release.outputs.new-release-published == 'true' }}
+    uses: ./.github/workflows/backend-docker-publish.yml
+    with:
+      version: ${{ needs.release.outputs.release-version }}
+    secrets: inherit

@@ -21,4 +21,9 @@ FROM base AS final
 WORKDIR /app
 RUN mkdir -p wwwroot/media && mkdir -p umbraco/Data/TEMP
 COPY --from=publish /app/publish .
+
+LABEL org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}
+LABEL org.opencontainers.image.description="MethodConf Backend - Umbraco CMS"
+LABEL org.opencontainers.image.licenses=MIT
+
 ENTRYPOINT ["dotnet", "MethodConf.Cms.dll"]
