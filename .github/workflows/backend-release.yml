@@ -28,14 +28,12 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - run: npm install -g semantic-release semantic-release-commit-filter conventional-changelog-conventionalcommits @semantic-release/exec
-
       - name: Create Release
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ./backend
-        run: npx semantic-release
+        run: npx --package semantic-release@25 --package semantic-release-commit-filter --package conventional-changelog-conventionalcommits --package @semantic-release/exec semantic-release -e semantic-release-commit-filter
 
   docker:
     needs: release

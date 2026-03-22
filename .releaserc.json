@@ -1,5 +1,4 @@
 {
-  "extends": "semantic-release-commit-filter",
   "branches": ["main"],
   "tagFormat": "backend-v${version}",
   "plugins": [
