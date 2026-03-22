@@ -60,6 +60,8 @@ jobs:
           cache-to: type=gha,mode=max,scope=backend-${{ matrix.platform }}
           platforms: ${{ matrix.platform }}
           provenance: false
+          build-args: |
+            REPOSITORY_URL=${{ github.server_url }}/${{ github.repository }}
 
   merge:
     name: Create Multi-Arch Manifest
