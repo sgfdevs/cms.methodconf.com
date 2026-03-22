@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - run: npm install -g semantic-release conventional-changelog-conventionalcommits @semantic-release/exec
+      - run: npm install -g semantic-release semantic-release-monorepo conventional-changelog-conventionalcommits @semantic-release/exec
 
       - name: Create Release
         id: semantic
