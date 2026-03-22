@@ -93,7 +93,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const tag = 'backend-v${{ inputs.version }}';
+            const tag = 'v${{ inputs.version }}-backend';
             const { data: release } = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
