@@ -7,10 +7,31 @@ on:
       - 'backend/**'
       - 'frontend/**'
       - '.github/workflows/**'
+
 jobs:
-  lint-build-frontend:
+  changes:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.changed_files != '0' && (contains(github.event.pull_request.changed_files, 'frontend/') || contains(github.event.pull_request.changed_files, '.github/workflows/')) }}
+    outputs:
+      frontend: ${{ steps.changed-files.outputs.frontend_any_changed }}
+      backend: ${{ steps.changed-files.outputs.backend_any_changed }}
+      workflows: ${{ steps.changed-files.outputs.workflows_any_changed }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: tj-actions/changed-files@v46
+        id: changed-files
+        with:
+          files_yaml: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+            workflows:
+              - '.github/workflows/**'
+
+  lint-build-frontend:
+    needs: changes
+    runs-on: ubuntu-latest
+    if: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.workflows == 'true' }}
     defaults:
       run:
         working-directory: './frontend'
@@ -25,9 +46,11 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run build
+
   lint-build-test-backend:
+    needs: changes
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.changed_files != '0' && (contains(github.event.pull_request.changed_files, 'backend/') || contains(github.event.pull_request.changed_files, '.github/workflows/')) }}
+    if: ${{ needs.changes.outputs.backend == 'true' || needs.changes.outputs.workflows == 'true' }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-dotnet@v5
