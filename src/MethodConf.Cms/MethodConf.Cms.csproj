@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UserSecretsId>e32a85f3-3a27-42c5-be7c-975d15ecb122</UserSecretsId>
@@ -18,9 +18,9 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Razor.Templating.Core" Version="2.0.0" />
-        <PackageReference Include="Umbraco.Cms" Version="14.3.4" />
-        <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="14.0.0-beta.1"/>
-        <PackageReference Include="uSync" Version="14.0.0"/>
+        <PackageReference Include="Umbraco.Cms" Version="15.4.4" />
+        <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="15.0.2"/>
+        <PackageReference Include="uSync" Version="15.1.9"/>
     </ItemGroup>
 
     <ItemGroup>
