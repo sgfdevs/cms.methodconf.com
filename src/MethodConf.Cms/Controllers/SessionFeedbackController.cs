@@ -20,7 +20,7 @@ public class SessionFeedbackController(ISessionFeedbackService sessionFeedbackSe
 
         return result switch
         {
-            { IsFailed: true } when result.Errors.Any(e => e is InvalidEntityIdError or IneligibleForFeedback) => BadRequest(result.Errors),
+            { IsFailed: true } when result.Errors.Any(e => e is InvalidEntityIdError) => BadRequest(result.Errors),
             { IsSuccess: true } => Ok(mapper.Map<SessionFeedbackResponseDto>(result.Value)),
             _ => StatusCode(500)
         };

@@ -18,7 +18,7 @@ public class ConferenceScheduleService(IPublishedContentQuery publishedContentQu
             return Result.Fail(new InvalidEntityIdError(conferenceId.ToString()));
         }
 
-        var sessions = conference.FirstChild<Sessions>()?.Children.ToArray() ?? [];
+        var sessions = conference.FirstChild<Sessions>()?.Children<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>()?.ToArray() ?? [];
 
         var scheduleItems = new List<ScheduleItem>();
 
