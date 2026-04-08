@@ -10,17 +10,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="13.0.1"/>
+        <PackageReference Include="AutoMapper" Version="16.1.1"/>
         <PackageReference Include="FluentResults" Version="3.16.0"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.11.0"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.13.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Razor.Templating.Core" Version="2.0.0" />
-        <PackageReference Include="Umbraco.Cms" Version="15.4.4" />
-        <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="15.0.2"/>
-        <PackageReference Include="uSync" Version="15.1.9"/>
+        <PackageReference Include="Umbraco.Cms" Version="16.5.1" />
+        <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="16.0.1"/>
+        <PackageReference Include="uSync" Version="16.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
