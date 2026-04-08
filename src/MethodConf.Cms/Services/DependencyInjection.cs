@@ -11,7 +11,7 @@ public static class DependencyInjection
         builder.Services.AddScoped<IConferenceScheduleService, ConferenceScheduleService>();
         builder.Services.AddScoped<ISessionFeedbackService, SessionFeedbackService>();
         builder.Services.AddScoped<IConferenceIssueService, ConferenceIssueService>();
-        builder.Services.AddAutoMapper(typeof(DefaultProfile));
+        builder.Services.AddAutoMapper(_ => { }, typeof(DefaultProfile).Assembly);
         builder.Services.AddRazorTemplating();
 
         return builder;

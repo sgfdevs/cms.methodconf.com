@@ -76,7 +76,7 @@ public class ConferenceIssueService(
             body: content,
             isBodyHtml: true);
 
-        await emailSender.SendAsync(message, emailType: "Organizer Message");
+        await emailSender.SendAsync(message, "Organizer Message", true, null);
 
     }
 
@@ -97,7 +97,7 @@ public class ConferenceIssueService(
             isBodyHtml: true,
             attachments: null);
 
-        await emailSender.SendAsync(message, emailType: "Reporter Message");
+        await emailSender.SendAsync(message, "Reporter Message", true, null);
     }
 
     public async Task<string?> GetResponseMessage(Issue issue)
