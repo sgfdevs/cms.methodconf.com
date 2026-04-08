@@ -1,12 +1,17 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MethodConf.Cms.Converters;
 
 public class MultiDimensionalArraySchemaFilter : ISchemaFilter
 {
-    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    public void Apply(IOpenApiSchema schema, SchemaFilterContext context)
     {
+        if (schema is not OpenApiSchema openApiSchema)
+        {
+            return;
+        }
+
         var type = context.Type;
 
         if (!type.IsArray || type.GetArrayRank() <= 1)
@@ -22,12 +27,12 @@ public class MultiDimensionalArraySchemaFilter : ISchemaFilter
         {
             elementSchema = new OpenApiSchema
             {
-                Type = "array",
+                Type = JsonSchemaType.Array,
                 Items = elementSchema
             };
         }
 
-        schema.Type = "array";
-        schema.Items = elementSchema.Items;
+        openApiSchema.Type = JsonSchemaType.Array;
+        openApiSchema.Items = elementSchema.Items;
     }
 }
