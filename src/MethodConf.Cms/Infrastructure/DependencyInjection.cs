@@ -9,7 +9,7 @@ public static class DependencyInjection
         builder.Services.AddUmbracoDbContext<AppDbContext>((servicesProvider, options, _, _) =>
         {
             options.UseUmbracoDatabaseProvider(servicesProvider);
-        });
+        }, shareUmbracoConnection: true);
 
         return builder;
     }
