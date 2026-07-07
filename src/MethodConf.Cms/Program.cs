@@ -1,6 +1,7 @@
 using MethodConf.Cms.Converters;
 using MethodConf.Cms.Infrastructure;
 using MethodConf.Cms.Services;
+using Microsoft.AspNetCore.OpenApi;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,9 +19,9 @@ builder.CreateUmbracoBuilder()
     .AddComposers()
     .Build();
 
-builder.Services.AddSwaggerGen(opts =>
+builder.Services.Configure<OpenApiOptions>("default", options =>
 {
-    opts.SchemaFilter<MultiDimensionalArraySchemaFilter>();
+    options.AddSchemaTransformer<MultiDimensionalArraySchemaFilter>();
 });
 
 builder.AddApplicationInfrastructure();

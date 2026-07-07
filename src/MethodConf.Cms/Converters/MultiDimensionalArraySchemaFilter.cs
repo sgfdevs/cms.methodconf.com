@@ -1,38 +1,42 @@
+using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MethodConf.Cms.Converters;
 
-public class MultiDimensionalArraySchemaFilter : ISchemaFilter
+public class MultiDimensionalArraySchemaFilter : IOpenApiSchemaTransformer
 {
-    public void Apply(IOpenApiSchema schema, SchemaFilterContext context)
+    public Task TransformAsync(
+        OpenApiSchema schema,
+        OpenApiSchemaTransformerContext context,
+        CancellationToken cancellationToken)
     {
-        if (schema is not OpenApiSchema openApiSchema)
-        {
-            return;
-        }
-
-        var type = context.Type;
+        var type = context.JsonTypeInfo.Type;
 
         if (!type.IsArray || type.GetArrayRank() <= 1)
         {
-            return;
+            return Task.CompletedTask;
         }
 
-        var elementType = type.GetElementType();
-
-        var elementSchema = context.SchemaGenerator.GenerateSchema(elementType, context.SchemaRepository);
+        var elementType = type.GetElementType()!;
+        var elementSchema = CreateElementSchema(elementType);
 
         for (var i = type.GetArrayRank(); i > 0; i--)
         {
             elementSchema = new OpenApiSchema
             {
                 Type = JsonSchemaType.Array,
-                Items = elementSchema
+                Items = elementSchema,
             };
         }
 
-        openApiSchema.Type = JsonSchemaType.Array;
-        openApiSchema.Items = elementSchema.Items;
+        schema.Type = JsonSchemaType.Array;
+        schema.Items = elementSchema.Items;
+
+        return Task.CompletedTask;
     }
+
+    private static OpenApiSchema CreateElementSchema(Type elementType) =>
+        elementType == typeof(string)
+            ? new OpenApiSchema { Type = JsonSchemaType.String }
+            : new OpenApiSchema();
 }

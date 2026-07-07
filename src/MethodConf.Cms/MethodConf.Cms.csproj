@@ -18,9 +18,8 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Razor.Templating.Core" Version="3.1.0" />
-        <PackageReference Include="Umbraco.Cms" Version="17.4.2" />
-        <PackageReference Include="Umbraco.Community.DeliveryApiExtensions" Version="17.0.0" />
-        <PackageReference Include="uSync" Version="17.3.2" />
+        <PackageReference Include="Umbraco.Cms" Version="18.0.2" />
+        <PackageReference Include="uSync" Version="18.0.1" />
     </ItemGroup>
 
     <ItemGroup>

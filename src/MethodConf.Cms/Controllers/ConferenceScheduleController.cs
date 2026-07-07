@@ -4,8 +4,6 @@ using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Dtos;
 using MethodConf.Cms.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Umbraco.Cms.Api.Delivery.Controllers.Content;
-using Umbraco.Cms.Api.Management.Controllers.PartialView.Snippet;
 
 namespace MethodConf.Cms.Controllers;
 
