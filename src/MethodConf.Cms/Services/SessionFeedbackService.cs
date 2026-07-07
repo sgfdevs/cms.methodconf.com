@@ -1,15 +1,15 @@
-using AutoMapper;
 using FluentResults;
 using MethodConf.Cms.Domain;
 using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Infrastructure;
+using MethodConf.Cms.Mapping;
 using MethodConf.Cms.Services.Interfaces;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Web.Common.PublishedModels;
 
 namespace MethodConf.Cms.Services;
 
-public class SessionFeedbackService(IPublishedContentQuery publishedContentQuery, AppDbContext dbContext, IMapper mapper) : ISessionFeedbackService
+public class SessionFeedbackService(IPublishedContentQuery publishedContentQuery, AppDbContext dbContext, SessionFeedbackMapper mapper) : ISessionFeedbackService
 {
 
     public async Task<Result<SessionFeedback>> Create(Guid sessionId, CreateSessionFeedback createSessionFeedback)
@@ -24,8 +24,7 @@ public class SessionFeedbackService(IPublishedContentQuery publishedContentQuery
             return new IneligibleForFeedback(session);
         }
 
-        var sessionFeedback = mapper.Map<SessionFeedback>(createSessionFeedback);
-        sessionFeedback.SessionId = session.Key;
+        var sessionFeedback = mapper.ToSessionFeedback(createSessionFeedback, session.Key);
         sessionFeedback.CreatedAt = DateTime.UtcNow;
 
 

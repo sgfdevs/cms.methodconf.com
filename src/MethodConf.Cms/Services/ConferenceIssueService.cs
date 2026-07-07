@@ -1,9 +1,9 @@
-using AutoMapper;
 using FluentResults;
 using MethodConf.Cms.Domain;
 using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Dtos;
 using MethodConf.Cms.Infrastructure;
+using MethodConf.Cms.Mapping;
 using MethodConf.Cms.Services.Interfaces;
 using Microsoft.Extensions.Options;
 using Razor.Templating.Core;
@@ -21,7 +21,7 @@ public class ConferenceIssueService(
     IEmailSender emailSender,
     IRazorTemplateEngine razorEngine,
     IOptions<GlobalSettings> globalSettings,
-    IMapper mapper) : IConferenceIssueService
+    IssueMapper mapper) : IConferenceIssueService
 {
     private const string OrganizerEmailSubject = "New Issue Reported for Method Conf";
     private const string ReporterEmailSubject = "Your Issue Has Been Recieved";
@@ -33,8 +33,7 @@ public class ConferenceIssueService(
             return Result.Fail(new InvalidEntityIdError(conferenceId.ToString()));
         }
 
-        var newIssue = mapper.Map<Issue>(createIssue);
-        newIssue.ConferenceId = conference.Key;
+        var newIssue = mapper.ToIssue(createIssue, conference.Key);
         newIssue.CreatedAt = DateTime.UtcNow;
 
         dbContext.Add(newIssue);
@@ -56,7 +55,7 @@ public class ConferenceIssueService(
             await SendOrganizerEmail(newIssue);
         }
 
-        var issueWithResponse = mapper.Map<IssueWithResponse>(newIssue);
+        var issueWithResponse = mapper.ToIssueWithResponse(newIssue);
         issueWithResponse.ResponseMarkup = await GetResponseMessage(newIssue) ?? "";
 
         return issueWithResponse;
@@ -64,7 +63,7 @@ public class ConferenceIssueService(
 
     private async Task SendOrganizerEmail(Issue issue)
     {
-        var vm = mapper.Map<NewIssueEmailViewModel>(issue);
+        var vm = mapper.ToNewIssueEmailViewModel(issue);
         vm.Title = OrganizerEmailSubject;
 
         var content = await razorEngine.RenderAsync("~/Views/Templates/NewIssueOrganizerEmail.cshtml", vm);
@@ -82,7 +81,7 @@ public class ConferenceIssueService(
 
     private async Task SendReporterEmail(string reporterEmail, Issue issue)
     {
-        var vm = mapper.Map<NewIssueEmailViewModel>(issue);
+        var vm = mapper.ToNewIssueEmailViewModel(issue);
         vm.Title = ReporterEmailSubject;
         var content = await razorEngine.RenderAsync("~/Views/Templates/NewIssueReporterEmail.cshtml", vm);
 
@@ -102,7 +101,7 @@ public class ConferenceIssueService(
 
     public async Task<string?> GetResponseMessage(Issue issue)
     {
-        var vm = mapper.Map<NewIssueAppResponseViewModel>(issue);
+        var vm = mapper.ToNewIssueAppResponseViewModel(issue);
         return await razorEngine.RenderAsync("~/Views/Templates/NewIssueAppResponse.cshtml", vm);
     }
 }

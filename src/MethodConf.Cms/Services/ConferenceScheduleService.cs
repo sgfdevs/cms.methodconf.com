@@ -1,7 +1,7 @@
-using AutoMapper;
 using FluentResults;
 using MethodConf.Cms.Domain;
 using MethodConf.Cms.Domain.Errors;
+using MethodConf.Cms.Mapping;
 using MethodConf.Cms.Services.Interfaces;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Web;
@@ -9,7 +9,7 @@ using Umbraco.Cms.Web.Common.PublishedModels;
 
 namespace MethodConf.Cms.Services;
 
-public class ConferenceScheduleService(IPublishedContentQuery publishedContentQuery, IScheduleGridGenerator scheduleGridGenerator, IMapper mapper) : IConferenceScheduleService
+public class ConferenceScheduleService(IPublishedContentQuery publishedContentQuery, IScheduleGridGenerator scheduleGridGenerator, ScheduleMapper mapper) : IConferenceScheduleService
 {
     public Result<ConferenceSchedule> GetSchedule(Guid conferenceId)
     {
@@ -27,10 +27,10 @@ public class ConferenceScheduleService(IPublishedContentQuery publishedContentQu
             switch (sessionOrTrack)
             {
                 case Session session:
-                    scheduleItems.Add(mapper.Map<SessionItem>(session));
+                    scheduleItems.Add(mapper.ToSessionItem(session));
                     continue;
                 case Track track:
-                    scheduleItems.Add(mapper.Map<TrackItem>(track));
+                    scheduleItems.Add(mapper.ToTrackItem(track));
                     continue;
             }
         }

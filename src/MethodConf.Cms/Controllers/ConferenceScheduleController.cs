@@ -1,7 +1,7 @@
 using Asp.Versioning;
-using AutoMapper;
 using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Dtos;
+using MethodConf.Cms.Mapping;
 using MethodConf.Cms.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +10,7 @@ namespace MethodConf.Cms.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route(RouteTemplates.ConferenceSchedule)]
-public class ConferenceScheduleController(IConferenceScheduleService conferenceScheduleService, IMapper mapper) : Controller
+public class ConferenceScheduleController(IConferenceScheduleService conferenceScheduleService, ScheduleMapper mapper) : Controller
 {
     [HttpGet]
     public ActionResult<ConferenceScheduleResponseDto> GetSchedule(Guid conferenceId)
@@ -20,7 +20,7 @@ public class ConferenceScheduleController(IConferenceScheduleService conferenceS
         return result switch
         {
             { IsFailed: true } when result.Errors.Any(e => e is InvalidEntityIdError) => NotFound(result.Errors),
-            { IsSuccess: true } => Ok(mapper.Map<ConferenceScheduleResponseDto>(result.Value)),
+            { IsSuccess: true } => Ok(mapper.ToDto(result.Value)),
             _ => StatusCode(500)
         };
     }

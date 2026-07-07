@@ -1,7 +1,7 @@
-using AutoMapper;
 using MethodConf.Cms.Domain;
 using MethodConf.Cms.Domain.Errors;
 using MethodConf.Cms.Dtos;
+using MethodConf.Cms.Mapping;
 using MethodConf.Cms.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,19 +9,19 @@ namespace MethodConf.Cms.Controllers;
 
 [ApiController]
 [Route(RouteTemplates.SessionFeedback)]
-public class SessionFeedbackController(ISessionFeedbackService sessionFeedbackService, IMapper mapper) : Controller
+public class SessionFeedbackController(ISessionFeedbackService sessionFeedbackService, SessionFeedbackMapper mapper) : Controller
 {
     [HttpPost]
     public async Task<ActionResult<SessionFeedbackResponseDto>> Create(Guid sessionId, CreateSessionFeedbackRequestDto request)
     {
-        var createSessionFeedback = mapper.Map<CreateSessionFeedback>(request);
+        var createSessionFeedback = mapper.ToCreateSessionFeedback(request);
 
         var result = await sessionFeedbackService.Create(sessionId, createSessionFeedback);
 
         return result switch
         {
             { IsFailed: true } when result.Errors.Any(e => e is InvalidEntityIdError) => BadRequest(result.Errors),
-            { IsSuccess: true } => Ok(mapper.Map<SessionFeedbackResponseDto>(result.Value)),
+            { IsSuccess: true } => Ok(mapper.ToDto(result.Value)),
             _ => StatusCode(500)
         };
     }
