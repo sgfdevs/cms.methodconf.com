@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.OpenApi;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+var searchIndexingEnabled = builder.Configuration.GetValue(
+    "MethodConf:Site:SearchIndexingEnabled", true);
 
 builder.CreateUmbracoBuilder()
     .AddBackOffice(mvc =>
@@ -35,6 +37,21 @@ app.UseSerilogRequestLogging(options =>
 });
 
 await app.BootUmbracoAsync();
+
+if (!searchIndexingEnabled)
+{
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
+        await next();
+    });
+}
+
+app.MapGet("/robots.txt", () => Results.Text(
+    searchIndexingEnabled
+        ? "User-agent: *\nAllow: /\n"
+        : "User-agent: *\nDisallow: /\n",
+    "text/plain")).AllowAnonymous();
 
 app.MapControllerRoute("default", "/",
     new { Controller = "Home", Action = "Index" });
