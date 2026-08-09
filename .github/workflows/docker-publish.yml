@@ -1,4 +1,4 @@
-name: Build and Publish Backend Docker Image
+name: Build and Publish Docker Image
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/backend
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -48,20 +48,17 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: .
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.version }}-${{ steps.platform.outputs.tag }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
-          cache-from: type=gha,scope=backend-${{ matrix.platform }}
-          cache-to: type=gha,mode=max,scope=backend-${{ matrix.platform }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          cache-to: type=inline
           platforms: ${{ matrix.platform }}
           provenance: false
-          build-args: |
-            REPOSITORY_URL=${{ github.server_url }}/${{ github.repository }}
 
   merge:
     name: Create Multi-Arch Manifest
@@ -93,19 +90,19 @@ jobs:
         uses: actions/github-script@v9
         with:
           script: |
-            const tag = 'v${{ inputs.version }}-backend';
+            const tag = 'v${{ inputs.version }}';
             const { data: release } = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: tag
             });
 
-            const imageUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pkgs/container/${context.repo.repo}%2Fbackend`;
+            const imageUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pkgs/container/${context.repo.repo}`;
             const dockerSection = `## Docker Image\n\n` +
               `**Published:** ✅\n` +
-              `**Image:** \`ghcr.io/${context.repo.owner}/${context.repo.repo}/backend:${{ inputs.version }}\`\n` +
-              `**Latest:** \`ghcr.io/${context.repo.owner}/${context.repo.repo}/backend:latest\`\n\n` +
-              `Pull: \`docker pull ghcr.io/${context.repo.owner}/${context.repo.repo}/backend:${{ inputs.version }}\`\n\n` +
+              `**Image:** \`ghcr.io/${context.repo.owner}/${context.repo.repo}:${{ inputs.version }}\`\n` +
+              `**Latest:** \`ghcr.io/${context.repo.owner}/${context.repo.repo}:latest\`\n\n` +
+              `Pull: \`docker pull ghcr.io/${context.repo.owner}/${context.repo.repo}:${{ inputs.version }}\`\n\n` +
               `[View on GitHub Container Registry](${imageUrl})`;
 
             await github.rest.repos.updateRelease({

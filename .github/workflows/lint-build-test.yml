@@ -1,56 +1,16 @@
 name: Lint Build Test
+
 on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'backend/**'
-      - 'frontend/**'
-      - '.github/workflows/**'
+
+permissions:
+  contents: read
 
 jobs:
-  changes:
+  lint-build-test:
     runs-on: ubuntu-latest
-    outputs:
-      frontend: ${{ steps.changed-files.outputs.frontend_any_changed }}
-      backend: ${{ steps.changed-files.outputs.backend_any_changed }}
-      workflows: ${{ steps.changed-files.outputs.workflows_any_changed }}
-    steps:
-      - uses: actions/checkout@v7
-      - uses: tj-actions/changed-files@v47
-        id: changed-files
-        with:
-          files_yaml: |
-            frontend:
-              - 'frontend/**'
-            backend:
-              - 'backend/**'
-            workflows:
-              - '.github/workflows/**'
-
-  lint-build-frontend:
-    needs: changes
-    runs-on: ubuntu-latest
-    if: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.workflows == 'true' }}
-    defaults:
-      run:
-        working-directory: './frontend'
-    env:
-      NEXT_PUBLIC_UMBRACO_BASE_URL: https://cms.methodconf.com/
-      NEXT_PUBLIC_SITE_URL: https://www.methodconf.com/
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: './frontend/.nvmrc'
-      - run: npm install
-      - run: npm run lint
-      - run: npm run build
-
-  lint-build-test-backend:
-    needs: changes
-    runs-on: ubuntu-latest
-    if: ${{ needs.changes.outputs.backend == 'true' || needs.changes.outputs.workflows == 'true' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-dotnet@v5

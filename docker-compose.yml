@@ -11,7 +11,7 @@ services:
       - './src/MethodConf.Cms/umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
       - './src/MethodConf.Cms/wwwroot/media:/app/wwwroot/media'
       - 'cache:/app/umbraco/Data/TEMP'
-      - 'data-protection-keys:/root/.aspnet/DataProtection-Keys'
+      - 'data-protection-keys:/home/app/.aspnet/DataProtection-Keys'
     restart: unless-stopped
     profiles: [ backend ]
   sqlite-web:

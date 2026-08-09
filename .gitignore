@@ -456,3 +456,4 @@ appsettings-schema.*.json
 
 # JSON schema file for umbraco-package.json
 umbraco-package-schema.json
+/.env

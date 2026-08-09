@@ -2,20 +2,20 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{164711D0-ED4A-492D-BD94-073C1DE0604E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms", "backend\src\MethodConf.Cms\MethodConf.Cms.csproj", "{4D86F9D2-774E-43D7-A8F6-878D10851AA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms", "src\MethodConf.Cms\MethodConf.Cms.csproj", "{4D86F9D2-774E-43D7-A8F6-878D10851AA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B300E205-8207-442E-A4EF-F252BDA321A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms.Tests", "backend\tests\MethodConf.Cms.Tests\MethodConf.Cms.Tests.csproj", "{90AD8E26-CBDD-487E-BD46-2A7179CE640B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodConf.Cms.Tests", "tests\MethodConf.Cms.Tests\MethodConf.Cms.Tests.csproj", "{90AD8E26-CBDD-487E-BD46-2A7179CE640B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{502A12F2-BA26-41C8-B0CA-3F9C73F79E39}"
 	ProjectSection(SolutionItems) = preProject
-		backend\.dockerignore = backend\.dockerignore
-		backend\.env = backend\.env
-		backend\.env.example = backend\.env.example
-		backend\docker-compose.yml = backend\docker-compose.yml
-		backend\Dockerfile = backend\Dockerfile
-		backend\.gitignore = backend\.gitignore
+		.dockerignore = .dockerignore
+		.env = .env
+		.env.example = .env.example
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global
