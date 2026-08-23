@@ -46,7 +46,7 @@ jobs:
       - release
       - docker
     if: ${{ needs.release.outputs.new-release-published == 'true' }}
-    uses: glitchedmob/infra-gha/.github/workflows/kustomize-image-pr.yml@v0.8.1
+    uses: glitchedmob/infra-gha/.github/workflows/kustomize-image-pr.yml@v0.11.3
     with:
       deployment-repository: sgfdevs/infra-k8s-apps
       kustomization-path: src/k8s/apps/methodconf.com/staging
@@ -65,7 +65,7 @@ jobs:
       - docker
       - promote-staging
     if: ${{ needs.release.outputs.new-release-published == 'true' }}
-    uses: glitchedmob/infra-gha/.github/workflows/kustomize-image-pr.yml@v0.8.1
+    uses: glitchedmob/infra-gha/.github/workflows/kustomize-image-pr.yml@v0.11.3
     with:
       deployment-repository: sgfdevs/infra-k8s-apps
       kustomization-path: src/k8s/apps/methodconf.com/production
