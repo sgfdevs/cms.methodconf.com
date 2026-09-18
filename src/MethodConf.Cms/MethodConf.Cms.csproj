@@ -11,15 +11,17 @@
 
     <ItemGroup>
         <PackageReference Include="FluentResults" Version="4.0.0" />
-        <PackageReference Include="MimeKit" Version="4.17.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+        <PackageReference Include="MimeKit" Version="4.18.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <!-- The private design package cannot align runtime dependencies in referencing projects. -->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12" />
         <PackageReference Include="Razor.Templating.Core" Version="3.1.0" />
         <PackageReference Include="Riok.Mapperly" Version="4.3.1" />
-        <PackageReference Include="Umbraco.Cms" Version="18.1.1" />
-        <PackageReference Include="uSync" Version="18.1.1" />
+        <PackageReference Include="Umbraco.Cms" Version="18.2.0" />
+        <PackageReference Include="uSync" Version="18.1.4" />
     </ItemGroup>
 
     <ItemGroup>
