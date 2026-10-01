@@ -1,4 +1,15 @@
 services:
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.48@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d
+    command: [mini, -dir=/data]
+    environment:
+      AWS_ACCESS_KEY_ID: methodconf-local
+      AWS_SECRET_ACCESS_KEY: methodconf-local-password
+      S3_BUCKET: methodconf-local
+    ports:
+      - '127.0.0.1:8334:8333'
+    volumes:
+      - 'seaweedfs-data:/data'
   backend:
     build:
       context: ./
@@ -7,9 +18,17 @@ services:
       - '${APP_PORT:-8080}:8080'
     env_file:
       - .env
+    environment:
+      AWS_ACCESS_KEY_ID: methodconf-local
+      AWS_SECRET_ACCESS_KEY: methodconf-local-password
+      AWS_SESSION_TOKEN: ""
+      AWS__ServiceURL: http://seaweedfs:8333
+      AWS__ForcePathStyle: "true"
+      Umbraco__Storage__AWSS3__Media__BucketName: methodconf-local
+    depends_on:
+      - seaweedfs
     volumes:
       - './src/MethodConf.Cms/umbraco/Data/Umbraco.sqlite.db:/app/umbraco/Data/Umbraco.sqlite.db'
-      - './src/MethodConf.Cms/wwwroot/media:/app/wwwroot/media'
       - 'cache:/app/umbraco/Data/TEMP'
       - 'data-protection-keys:/home/app/.aspnet/DataProtection-Keys'
     restart: unless-stopped
@@ -37,5 +56,6 @@ services:
     profiles: [ local-email ]
 
 volumes:
+  seaweedfs-data:
   cache:
   data-protection-keys:
