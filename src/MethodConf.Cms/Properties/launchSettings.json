@@ -13,7 +13,10 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AWS_ACCESS_KEY_ID": "methodconf-local",
+        "AWS_SECRET_ACCESS_KEY": "methodconf-local-password",
+        "AWS_SESSION_TOKEN": ""
       }
     },
     "Umbraco.Web.UI": {
@@ -22,7 +25,10 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:44350;http://localhost:7158",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AWS_ACCESS_KEY_ID": "methodconf-local",
+        "AWS_SECRET_ACCESS_KEY": "methodconf-local-password",
+        "AWS_SESSION_TOKEN": ""
       }      
     }
   }
