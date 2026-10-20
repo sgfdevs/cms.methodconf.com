@@ -23,6 +23,7 @@
         <PackageReference Include="Razor.Templating.Core" Version="3.1.0" />
         <PackageReference Include="Riok.Mapperly" Version="4.3.1" />
         <PackageReference Include="Umbraco.Cms" Version="18.2.0" />
+        <PackageReference Include="Umbraco.StorageProviders" Version="18.0.0" />
         <PackageReference Include="uSync" Version="18.1.4" />
     </ItemGroup>
 
