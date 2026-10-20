@@ -3,12 +3,13 @@ using MethodConf.Cms.Infrastructure;
 using MethodConf.Cms.Services;
 using Microsoft.AspNetCore.OpenApi;
 using Serilog;
+using Umbraco.Cms.Core.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 var searchIndexingEnabled = builder.Configuration.GetValue(
     "MethodConf:Site:SearchIndexingEnabled", true);
 
-builder.CreateUmbracoBuilder()
+var umbracoBuilder = builder.CreateUmbracoBuilder()
     .AddBackOffice(mvc =>
     {
         mvc.AddJsonOptions(options =>
@@ -18,8 +19,14 @@ builder.CreateUmbracoBuilder()
     })
     .AddWebsite()
     .AddDeliveryApi()
-    .AddComposers()
-    .Build();
+    .AddComposers();
+
+if (!string.IsNullOrEmpty(builder.Configuration["Umbraco:Storage:Cdn:Url"]))
+{
+    umbracoBuilder.AddCdnMediaUrlProvider();
+}
+
+umbracoBuilder.Build();
 
 builder.Services.Configure<OpenApiOptions>("default", options =>
 {
